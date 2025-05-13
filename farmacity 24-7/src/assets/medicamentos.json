@@ -1,0 +1,36 @@
+[{
+    "nombre": "cetirizina",
+    "presentacion": "tabletas",
+    "concentracion": "10 mg",
+    "precio": 150,
+    "laboratorio": "Laboratorio Farmacéutico S.A.",
+    "fecha_vencimiento": "2026-12-31",
+    "necesita_receta": false,
+    "imagen": "https://www.lasanteca.com/userfiles/2018/12/CETIRIZINA-10MG-CAJA-POR-10-TABLETAS-CON-BLISTER.jpg",
+    "descripcion": "Antihistamínico utilizado para aliviar síntomas de alergia como estornudos, picazón y secreción nasal.",
+    "contraindicaciones": "No usar en caso de hipersensibilidad a la cetirizina o a cualquiera de los excipientes."
+},
+{
+    "nombre": "ibuprofeno",
+    "presentacion": "tabletas",
+    "concentracion": "400 mg",
+    "precio": 200,
+    "laboratorio": "Farmacéuticos Unidos S.A.",
+    "fecha_vencimiento": "2025-06-30",
+    "necesita_receta": false,
+    "imagen": "https://www.lasanteca.com/userfiles/2018/12/IBUPROFENO-400MG-CAJA-POR-20-TABLETAS-CON-BLISTER.jpg",
+    "descripcion": "Antiinflamatorio no esteroideo utilizado para aliviar el dolor y reducir la inflamación.",
+    "contraindicaciones": "No usar en caso de úlcera gástrica activa, insuficiencia renal grave o alergia al ibuprofeno."
+},
+{
+    "nombre": "amoxicilina",
+    "presentacion": "cápsulas",
+    "concentracion": "500 mg",
+    "precio": 300,
+    "laboratorio": "Laboratorios Genéricos S.A.",
+    "fecha_vencimiento": "2024-11-15",
+    "necesita_receta": true,
+    "imagen": "https://www.lasanteca.com/userfiles/2018/12/AMOXICILINA-500MG-CAJA-POR-12-CAPSULAS-CON-BLISTER.jpg",
+    "descripcion": "Antibiótico utilizado para tratar infecciones bacterianas.",
+    "contraindicaciones": "No usar en caso de alergia a la penicilina o a cualquiera de los excipientes."
+}]
