@@ -1,25 +1,21 @@
 <template>
-    <nav class="bg-white shadow-md px-4 py-3 flex items-center justify-between">
-      <!-- Logo + Links -->
-      <div class="flex items-center gap-6">
-        <!-- Icono -->
-        <div class="text-xl font-bold text-green-600 flex items-center gap-2">
-          🏥
-          <span class="hidden sm:inline">FarmApp</span>
-        </div>
+    <nav class="relative bg-white shadow-md px-4 py-3 flex items-center justify-between">
+      <!-- IZQUIERDA: Logo -->
+      <div class="flex items-center gap-2">
+        <a href="https://www.farmacity.com">
+          <img src="../../assets/Farmacity_logo.png" alt="Logo" class="logo" />
+        </a>
+      </div>
   
-        <!-- Links -->
-        <RouterLink to="/" class="text-gray-700 hover:text-green-600 font-medium">
-          Home
-        </RouterLink>
-        <RouterLink to="/farmacity" class="text-gray-700 hover:text-green-600 font-medium">
+      <!-- CENTRO: Farmacity 24/7 (posición absoluta centrada) -->
+      <div class="absolute left-1/2 transform -translate-x-1/2">
+        <RouterLink to="/" class="text-gray-800 font-semibold text-lg hover:text-green-600">
           Farmacity 24/7
         </RouterLink>
       </div>
   
-      <!-- Login/Carrito -->
+      <!-- DERECHA: Login / Carrito -->
       <div class="flex items-center gap-4">
-        <!-- Dropdown Login/Register -->
         <div class="relative" @click="toggleDropdown">
           <button class="text-gray-700 hover:text-green-600 font-medium focus:outline-none">
             Login / Registrarse
@@ -33,7 +29,6 @@
           </div>
         </div>
   
-        <!-- Carrito -->
         <RouterLink to="/carrito" class="text-2xl text-gray-700 hover:text-green-600">
           🛒
         </RouterLink>
@@ -57,4 +52,16 @@
     }
   })
   </script>
-  
+  <style scoped>
+    .logo {
+        width: 30%;
+    }
+    .logo:hover {
+        transform: scale(1.1);
+        transition: transform 0.2s;
+    }
+    .logo:active {
+        transform: scale(1);
+        transition: transform 0.2s;
+    }
+    </style>
