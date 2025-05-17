@@ -29,9 +29,9 @@
           </div>
         </div>
   
-        <RouterLink to="/carrito" class="text-2xl text-gray-700 hover:text-green-600">
-          🛒
-        </RouterLink>
+       <div @click="$emit('toggle-carrito')" class="text-2xl text-gray-700 hover:text-green-600 cursor-pointer">
+  🛒
+</div>
       </div>
     </nav>
   </template>
