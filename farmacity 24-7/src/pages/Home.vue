@@ -8,8 +8,7 @@
             <div class="col-lg-2 col-4">
             <a href="#">Company Name</a>
             </div>
-      <Button>Click me</Button>
-  
+<Button>Click me</Button>  
             <div class="col-lg-6 col-sm-12">
                 <form action="#" class="search">
                     <div class="input-group w-100">
