@@ -1,12 +1,12 @@
 <script setup>
-import Navbar from '@/components/ui/Navbar.vue';
+import Navbar from '@/components/Navbar.vue';
 import Carrito from '@/components/carrito.vue';
 import { ref } from 'vue';
 const mostrarCarrito = ref(false);
 
 const toggleCarrito = () => {
   mostrarCarrito.value = !mostrarCarrito.value;
-  console.log('Estado del carrito:', mostrarCarrito.value); // Agrega esta línea
+  console.log('Estado del carrito:', mostrarCarrito.value); 
 };
 </script>
 <template>

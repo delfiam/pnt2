@@ -1,6 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './assets/main.css'
-
 import { createApp } from 'vue'
 import App from './App.vue'
 import CarritoPagina from './pages/CarritoPagina.vue'
