@@ -1,5 +1,4 @@
 <template>
-<!--import paymentMethod from '@/components/paymentMethod.vue'-->
 
   <h2 class="mb-4 fw-bold">Finalizar la compra</h2>
   <div class="checkout-container py-5">

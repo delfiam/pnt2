@@ -13,7 +13,10 @@
           Farmacity 24/7
         </RouterLink>
       </div>
-  
+      <div class="absolute left-1/2 transform -translate-x-1/2">
+        <RouterLink to="/carritoPagina" class="text-gray-800 font-semibold text-lg hover:text-green-600">
+Carrito        </RouterLink>
+      </div>
       <!-- DERECHA: Login / Carrito -->
       <div class="flex items-center gap-4">
         <div class="relative" @click="toggleDropdown">
