@@ -1,9 +1,4 @@
-<script setup>
-import { Button } from '@/components/ui/button'
-import { useRouter } from 'vue-router'
-import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
-import Navbar from '@/components/ui/Navbar.vue'
+<!-- ./src/App.vue -->
 
 
 // Cierra el dropdown si hacés clic afuera
@@ -15,13 +10,9 @@ document.addEventListener('click', (e) => {
 const router = useRouter()
 </script>
 <template>
-  <Navbar />
   <router-view />
 </template>
 
-<style scoped>
-:global(body) {
-  background-color: #f2f2f2;
-  color: black;
-}
-</style>
+<script setup>
+// No se necesita nada aquí por ahora
+</script>
