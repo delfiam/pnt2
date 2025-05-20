@@ -1,18 +1,23 @@
-<!-- ./src/App.vue -->
+<script setup>
+import Navbar from '@/components/ui/Navbar.vue';
+import Carrito from '@/components/carrito.vue';
+import { ref } from 'vue';
+const mostrarCarrito = ref(false);
 
-
-// Cierra el dropdown si hacés clic afuera
-document.addEventListener('click', (e) => {
-  if (!(e.target.closest('nav'))) {
-    showDropdown.value = false
-  }
-})
-const router = useRouter()
+const toggleCarrito = () => {
+  mostrarCarrito.value = !mostrarCarrito.value;
+  console.log('Estado del carrito:', mostrarCarrito.value); // Agrega esta línea
+};
 </script>
 <template>
-  <router-view />
+<Navbar @toggle-carrito="toggleCarrito" />  <router-view />
+  <Carrito :isCarritoVisible="mostrarCarrito" @update:isCarritoVisible="mostrarCarrito = $event" />
 </template>
 
-<script setup>
-// No se necesita nada aquí por ahora
-</script>
+
+<style scoped>
+:global(body) {
+  background-color: #f2f2f2;
+  color: black;
+}
+</style>
