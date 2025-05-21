@@ -1,4 +1,3 @@
-<!-- src/pages/Login.vue -->
 <script setup>
 import LoginForm from '@/components/LoginForm.vue'
 import { estaLogueado, obtenerUsuarioActual, getRol } from '@/store/auth'

@@ -30,8 +30,7 @@
 
 <script setup>
 import { ref, defineProps, defineEmits } from 'vue';
-import { useRouter } from 'vue-router'; // Importa useRouter
-
+import { useRouter } from 'vue-router'; 
 const props = defineProps({
   isCarritoVisible: Boolean
 });
@@ -42,20 +41,19 @@ const carritoItems = ref([
 ]);
 
 const emit = defineEmits(['update:isCarritoVisible']);
-const router = useRouter(); // Inicializa el router
+const router = useRouter();
 
 const cerrarCarrito = () => {
   emit('update:isCarritoVisible', false);
 };
 
 const irAComprar = () => {
-  router.push('/checkout'); // Cambia '/comprar' a '/checkout'
-  emit('update:isCarritoVisible', false); // Cierra el carrito al ir a comprar
+  router.push('/checkout'); 
+  emit('update:isCarritoVisible', false); 
 };
 </script>
 
 <style scoped>
-/* Estilos existentes */
 .carrito {
   position: fixed;
   top: 0;
@@ -103,8 +101,8 @@ const irAComprar = () => {
 
 .carrito-contenido {
   padding: 20px;
-  flex-grow: 1; /* Para que el contenido ocupe el espacio restante */
-  overflow-y: auto; /* Para hacer scroll si el contenido es muy largo */
+  flex-grow: 1; 
+  overflow-y: auto; 
 }
 
 .carrito-contenido ul {

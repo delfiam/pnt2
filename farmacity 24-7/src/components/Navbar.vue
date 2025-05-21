@@ -6,26 +6,26 @@
         </a>
       </div>
   
-      <div class="absolute left-1/2 transform -translate-x-1/2">
+    
+      <div class="flex items-center gap-4">
+        <div class="relative" @click="toggleDropdown">
+          <button class="text-gray-700 hover:text-green-600 font-medium focus:outline-none">
+          Ingresar
+          </button>
+          <div
+            v-if="showDropdown"
+            class="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-50"
+          >
+            <RouterLink to="/Login"  class="block px-4 py-2  text-sm text-gray-800 font-semibold text-lg hover:text-green-600">Iniciar sesión</RouterLink>
+            <RouterLink to="/Register" class="block px-4 py-2 text-sm font-semibold text-lg hover:text-green-600">Registrarse</RouterLink>
+          </div>
+        </div>
+    <div >
         <RouterLink to="/" class="text-gray-800 font-semibold text-lg hover:text-green-600">
           Farmacity 24/7
         </RouterLink>
       </div>
 
-      <div class="flex items-center gap-4">
-        <div class="relative" @click="toggleDropdown">
-          <button class="text-gray-700 hover:text-green-600 font-medium focus:outline-none">
-            Login / Registrarse
-          </button>
-          <div
-            v-if="showDropdown"
-            class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-50"
-          >
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Iniciar sesión</a>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Registrarse</a>
-          </div>
-        </div>
-  
        <div @click="$emit('toggle-carrito')" class="text-2xl text-gray-700 hover:text-green-600 cursor-pointer">
   🛒
 </div>
