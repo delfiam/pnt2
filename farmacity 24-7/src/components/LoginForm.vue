@@ -6,7 +6,7 @@ import { ref } from 'vue'
 // import { login } from '@/store/auth'
 
 // para utilizar Pinia
-import { useAuthStore } from '@store/auth.js'
+import { useAuthStore } from '@/store/auth'
 
 const auth = useAuthStore()
 const emit = defineEmits(['login-exitoso'])
@@ -20,10 +20,7 @@ async function handleLogin() {
     mensaje.value = 'Por favor completa todos los campos'
     return
   }
-  const usuario = await auth.login({
-    username: username.value,
-    password: password.value
-  })
+  const usuario = await auth.login({username:username.value ,password:password.value})
   if (!usuario) {
     mensaje.value = `Usuario o contraseña incorrecto`
     return
@@ -66,8 +63,10 @@ async function handleLogin() {
         Contraseña:
         <input v-model="password" type="password" />
       </label><br />
-      <button type="submit">Enviar</button>
+      <button @click="iniciarSesion">Iniciar Sesión</button>
+      
     </form>
-    <p>{{ mensaje }}</p>
+    <p v-if="auth.error" style="color:red">{{ auth.error }}</p>
+    <p v-if="auth.currentUser">Logueado como: {{ auth.currentUser.username }} ({{ auth.currentUser.rol }})</p>
   </div>
 </template>

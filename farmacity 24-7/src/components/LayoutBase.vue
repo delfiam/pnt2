@@ -1,11 +1,14 @@
+
 <script setup>
+import { useAuthStore } from '@/store/auth';
+const auth = useAuthStore()
 defineProps(['usuario', 'onLogout'])
 </script>
 
 <template>
 <div class="layout">
     <header>
-        <p v-if = "usuario">Sesión Activa como: {{ usuario.username }}</p>
+        <p v-if = "auth.currentUser">Sesión Activa como: {{ auth.currentUser.username }}</p>
         <p v-else> usuario: anonimo</p>
         <button @click="onLogout">Cerrar Sesión</button>
     </header>

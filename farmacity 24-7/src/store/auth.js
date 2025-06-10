@@ -19,7 +19,8 @@ export const useAuthStore = defineStore('auth', {
       this.error = null
       try {
         const data = await fetchUsers();
-        this.users = data;
+        this.users = data.users;
+        console.log(this.users)
       } catch (error) {
         console.error(`error cargando usuarios: ${error}`)
         this.error = error
@@ -28,8 +29,9 @@ export const useAuthStore = defineStore('auth', {
       }
     },
 
-    login({username, password}) {
-      const user = this.users.find(
+    async login({username, password}) {
+      await this.loadUsers()
+      const user = await this.users.find(
         (u) => u.username === username && u.password === password)
 
       if (!user) {

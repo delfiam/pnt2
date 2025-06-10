@@ -1,15 +1,16 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router';
-import { obtenerUsuarioActual, logout } from '@/store/auth';
+import { useAuthStore } from '@/store/auth';
 import LayoutBase from '@/components/LayoutBase.vue';
 
+const auth = useAuthStore()
 const message = ref("")
 const usuario = ref(null)
 const router = useRouter()
 
 onMounted(() => {
-    usuario.value = obtenerUsuarioActual()
+    usuario.value = auth.loadUserFromLocalStorage()
     if (usuario.value) {
         message.value = `Usuario logeado: ${usuario.value.username}`
     }
