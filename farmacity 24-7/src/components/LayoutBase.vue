@@ -7,11 +7,11 @@ defineProps(['usuario', 'onLogout'])
 
 <template>
 <div class="layout">
-    <header>
+    <!-- <header>
         <p v-if = "auth.currentUser">Sesión Activa como: {{ auth.currentUser.username }}</p>
         <p v-else> usuario: anonimo</p>
         <button @click="onLogout">Cerrar Sesión</button>
-    </header>
+    </header> -->
     <main>
         <slot />
     </main>

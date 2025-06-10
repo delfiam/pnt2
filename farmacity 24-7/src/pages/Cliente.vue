@@ -12,12 +12,12 @@ const usuario = ref(null)
 const router = useRouter()
 
 onMounted(() => {
-    if (auth.currentUser) {
-        message.value = `Usuario logeado: ${auth.currentUser.username}`
-    }
-    else {
-        message.value = `no hay usuario logeado`
-    }
+    // if (auth.currentUser) {
+    //     message.value = `Usuario logeado: ${auth.currentUser.username}`
+    // }
+    // else {
+    //     message.value = `no hay usuario logeado`
+    // }
 })
 
 function cerrarSesion (){
@@ -29,7 +29,7 @@ function cerrarSesion (){
 
 <template>
     <p>{{message}}</p>
-    <LayoutBase :usuario="auth.currentUser.username" :onLogout="cerrarSesion">
+    <LayoutBase >
         <h2>Bienvenido al Panel de Cliente</h2>
     </LayoutBase>
 </template>

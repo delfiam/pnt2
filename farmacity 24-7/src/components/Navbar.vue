@@ -8,7 +8,7 @@
 
 
     <div class="flex items-center gap-4">
-      <div class="relative" @click="toggleDropdown">
+      <div class="relative" @click="toggleDropdown" v-if="!auth.currentUser">
         <button class="text-gray-700 hover:text-green-600 font-medium focus:outline-none">
           Ingresar
         </button>
@@ -41,11 +41,14 @@
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import UserStatus from '@/components/UserStatus.vue'
+import { useAuthStore } from '@/store/auth'
 
+const auth=useAuthStore()
 const showDropdown = ref(false)
 const toggleDropdown = () => {
   showDropdown.value = !showDropdown.value
 }
+
 
 document.addEventListener('click', (e) => {
   if (!(e.target.closest('nav'))) {
