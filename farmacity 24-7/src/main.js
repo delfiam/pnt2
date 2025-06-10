@@ -12,6 +12,8 @@ import Register from '@/pages/Register.vue'
 import Cliente from '@/pages/Cliente.vue'
 import Admin from '@/pages/Admin.vue'
 import { obtenerUsuarioActual } from '@/store/auth'
+//pinia
+import {createPinia} from 'pinia'
 
 const routes = [
   { path: '/', component: Home },
@@ -29,6 +31,8 @@ const routes = [
     meta: { autorizacion: true, rol: ['admin'] }
   }
 ]
+const pinia =createPinia()
+
 
 const router = createRouter({
   history: createWebHistory(),
@@ -55,4 +59,6 @@ router.beforeEach((to,fron,next)=>{
 
 createApp(App)
   .use(router)
+  .use(pinia)
   .mount('#app')
+  

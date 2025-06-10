@@ -1,17 +1,22 @@
+<!-- src/pages/Login.vue -->
+
 <script setup>
 import LoginForm from '@/components/LoginForm.vue'
-import { estaLogueado, obtenerUsuarioActual, getRol } from '@/store/auth'
-import { ref, onMounted } from 'vue'
+//import { estaLogueado, obtenerUsuarioActual, getRol } from '@/store/auth'
+import useAuthStore from '@/store/auth' 
+import { ref, watch, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
+const auth = useAuthStore()
 const router = useRouter()
 const message = ref("")
 
 onMounted(() => {
-    if (estaLogueado()) {
+    auth.loadUserFromLocalStorage()
+    if (auth.currentUser()) {
         const usuario = obtenerUsuarioActual()
-        message.value = `Sesión ya iniciada como: ${usuario.username} / ${usuario.rol}`
-        redirigirSegunRol(usuario)
+        message.value = `Sesión ya iniciada como: ${auth.currentUser.username} / ${auth.currentUser.rol}`
+        redirigirSegunRol(auth.currentUser)
     }
 })
 
