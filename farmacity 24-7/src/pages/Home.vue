@@ -18,10 +18,14 @@ onMounted(async () => {
     <div class="container">
         <h1>Bienvenido a Farmacity</h1>
         <h2>Medicamentos</h2>
-        <div class="row">
-        <div class="col-md-4" v-for="medicamento in medicamentos" :key="medicamento.id">
-            <medicamentosCard :medicamento="medicamento" />
-        </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center">
+    
+          <medicamentosCard
+        v-for="medicamento in medicamentos"
+        :key="medicamento.id"
+        :medicamento="medicamento"
+      />
+       
         </div>
 </div>
 </template>

@@ -1,21 +1,40 @@
 <script setup>
 const props = defineProps({
-    medicamento: {
-        type: Object,
-        required: true
-    }
+  medicamento: {
+    type: Object,
+    required: true
+  }
 })
 </script>
 
 <template>
- 
-    <div class="card">
-        <img :src="medicamento.imagen" class="card-img-top" alt="Imagen del medicamento">
-        <div class="card-body">
-        <h5 class="card-title">{{ medicamento.nombre }}</h5>
-        <p class="card-text">Precio: ${{ medicamento.precio }}</p>
-        <p class="card-text">Descripción: {{ medicamento.descripcion }}</p>
-        <button class="btn btn-primary" @click="$emit('agregar-al-carrito', medicamento)">Agregar al carrito</button>
-        </div>
+   <div class="relative w-[260px] h-[440px] border rounded-xl shadow-md flex flex-col justify-between p-4 bg-white">
+    
+
+    <div v-if="medicamento.oferta" class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded shadow">
+      -{{ medicamento.oferta }} Oferta
     </div>
+
+    <div>
+      <img
+        :src="medicamento.imagen"
+        alt="Imagen del medicamento"
+        class="h-[140px] w-full object-contain mb-4"
+      />
+      <h5 class="text-base font-semibold text-gray-800 mb-1">{{ medicamento.nombre }}</h5>
+      <p class="text-green-600 font-bold text-lg mb-1">
+        ${{ medicamento.precio }}
+      </p>
+      <p class="text-xs text-gray-600 leading-snug line-clamp-3">
+        {{ medicamento.descripcion }}
+      </p>
+    </div>
+
+    <button
+      @click="$emit('agregar-al-carrito', medicamento)"
+      class="mt-4 bg-green-600 hover:bg-green-700 text-white text-sm py-2 rounded-md transition"
+    >
+      Agregar al carrito
+    </button>
+  </div>
 </template>

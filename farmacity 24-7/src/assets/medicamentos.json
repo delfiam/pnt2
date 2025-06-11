@@ -1,7 +1,7 @@
 [{
     "id": 1,
     "nombre": "Cetirizina",
-    "oferta": "10% de descuento",
+    "oferta": "10%",
     "presentacion": "Tabletas",
     "concentracion": "10 mg",
     "precio": 150,
@@ -56,7 +56,7 @@
 ,{
     "id": 5,
     "nombre": "Omeprazol",
-    "oferta": "20% de descuento",
+    "oferta": "20%",
     "presentacion": "Cápsulas",
     "concentracion": "20 mg",
     "precio": 250,
@@ -70,7 +70,7 @@
 ,{
     "id": 6,
     "nombre": "Loratadina",
-    "oferta": "15% de descuento",
+    "oferta": "15%",
     "presentacion": "Tabletas",
     "concentracion": "10 mg",
     "precio": 180,
@@ -84,7 +84,7 @@
 ,{
     "id": 7,
     "nombre": "Metformina",
-    "oferta": "10% de descuento",
+    "oferta": "10%",
     "presentacion": "Tabletas",
     "concentracion": "850 mg",
     "precio": 220,
