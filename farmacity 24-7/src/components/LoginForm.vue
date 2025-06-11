@@ -2,31 +2,53 @@
 
 <script setup>
 import { ref } from 'vue'
-import { login } from '@/store/auth'
+// // para utilizar con almacenamiento en localStorage
+// import { login } from '@/store/auth'
 
+// para utilizar Pinia
+import { useAuthStore } from '@/store/auth'
+
+const auth = useAuthStore()
 const emit = defineEmits(['login-exitoso'])
 const username = ref('')
 const password = ref('')
 const mensaje = ref('')
 
-function handleLogin() {
+// login con Pinia
+async function handleLogin() {
   if (!username.value || !password.value) {
     mensaje.value = 'Por favor completa todos los campos'
     return
   }
-
-  const usuario = login(username.value, password.value)
-
+  const usuario = await auth.login({username:username.value ,password:password.value})
   if (!usuario) {
-    mensaje.value = 'Usuario o contraseña incorrectos'
-    // username.value=""
-    // password.value = ""
+    mensaje.value = `Usuario o contraseña incorrecto`
     return
   }
-
   mensaje.value = `Bienvenido a Farmacity 24-7, ${usuario.username}`
   emit('login-exitoso', usuario)
+
 }
+
+// // login con localStorage
+// function handleLogin() {
+//   if (!username.value || !password.value) {
+//     mensaje.value = 'Por favor completa todos los campos'
+//     return
+//   }
+
+//   const usuario = login(username.value, password.value)
+
+//   if (!usuario) {
+//     mensaje.value = 'Usuario o contraseña incorrectos'
+//     // username.value=""
+//     // password.value = ""
+//     return
+//   }
+
+// mensaje.value = `Bienvenido a Farmacity 24-7, ${usuario.username}`
+// emit('login-exitoso', usuario)
+// }
 </script>
 
 <template>
@@ -41,8 +63,10 @@ function handleLogin() {
         Contraseña:
         <input v-model="password" type="password" />
       </label><br />
-      <button type="submit">Enviar</button>
+      <button @click="iniciarSesion">Iniciar Sesión</button>
+      
     </form>
-    <p>{{ mensaje }}</p>
+    <p v-if="auth.error" style="color:red">{{ auth.error }}</p>
+    <p v-if="auth.currentUser">Logueado como: {{ auth.currentUser.username }} ({{ auth.currentUser.rol }})</p>
   </div>
 </template>
