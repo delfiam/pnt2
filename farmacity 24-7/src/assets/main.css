@@ -5,6 +5,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.swiper-button-prev,
+.swiper-button-next {
+  color: #333 !important;
+  width: 24px;
+  height: 24px;
+}
 
-
-
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 24px;
+}

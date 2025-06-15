@@ -1,9 +1,11 @@
 <template>
   <nav class="relative bg-white shadow-md px-4 py-3 flex items-center justify-between">
     <div class="flex items-center gap-2">
-      <a href="https://www.farmacity.com">
+      <RouterLink to="/"
+            class="block px-4 py-2  text-sm text-gray-800 font-semibold text-lg hover:text-green-600">
+        
         <img src="../assets/Farmacity_logo.png" alt="Logo" class="logo" />
-      </a>
+   </RouterLink>
     </div>
 
 
@@ -20,11 +22,7 @@
             Registrarse</RouterLink>
         </div>
       </div>
-      <div>
-        <RouterLink to="/" class="text-gray-800 font-semibold text-lg hover:text-green-600">
-          Farmacity 24/7
-        </RouterLink>
-      </div>
+
 
       <div @click="$emit('toggle-carrito')" class="text-2xl text-gray-700 hover:text-green-600 cursor-pointer">
         🛒

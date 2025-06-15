@@ -8,8 +8,7 @@ const props = defineProps({
 </script>
 
 <template>
-   <div class="relative w-[260px] h-[440px] border rounded-xl shadow-md flex flex-col justify-between p-4 bg-white">
-    
+   <div class="relative w-[240px] h-[360px] border rounded-xl shadow-md flex flex-col justify-between p-4 bg-white">
 
     <div v-if="medicamento.oferta" class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded shadow">
       -{{ medicamento.oferta }} Oferta
@@ -19,7 +18,7 @@ const props = defineProps({
       <img
         :src="medicamento.imagen"
         alt="Imagen del medicamento"
-        class="h-[140px] w-full object-contain mb-4"
+        class="h-[100px] w-full object-contain mb-4"
       />
       <h5 class="text-base font-semibold text-gray-800 mb-1">{{ medicamento.nombre }}</h5>
       <p class="text-green-600 font-bold text-lg mb-1">
