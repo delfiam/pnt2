@@ -4,6 +4,7 @@ import Register from '@/pages/Register.vue'
 import Cliente from '@/pages/Cliente.vue'
 import Admin from '@/pages/Admin.vue'
 import { obtenerUsuarioActual } from '@/store/auth'
+import PedidosView from '@/pages/PedidosView.vue'
 
 const routes = [
   { path: '/', name: 'Home', component: Landing},
@@ -14,7 +15,8 @@ const routes = [
   },
   { path: '/admin', name: 'Admin', component: Admin,
     meta: {autorizacion: true, rol: ['admin']}
-   }
+   },
+   { path: '/pedidos', name: 'Pedidos', component: PedidosView }
 ]
 
 const router = createRouter({

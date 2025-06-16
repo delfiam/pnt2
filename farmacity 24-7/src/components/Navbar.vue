@@ -1,4 +1,8 @@
 <template>
+  <RouterLink to="/pedidos">
+  <button class="text-sm font-bold text-blue-500 hover:underline">Pedidos</button>
+</RouterLink>
+
   <nav class="relative bg-white shadow-md px-4 py-3 flex items-center justify-between">
     <div class="flex items-center gap-2">
       <RouterLink to="/"
@@ -38,8 +42,10 @@
 <script setup>
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
+
 import UserStatus from '@/components/UserStatus.vue'
 import { useAuthStore } from '@/store/auth'
+defineEmits(['toggle-carrito'])
 
 const auth=useAuthStore()
 const showDropdown = ref(false)
