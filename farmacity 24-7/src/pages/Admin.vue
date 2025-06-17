@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/store/auth';
+import chart from '@/components/chart.vue';
 import LayoutBase from '@/components/LayoutBase.vue';
 
 const auth = useAuthStore()
@@ -30,5 +31,6 @@ function cerrarSesion (){
     <!-- <p>{{ message }}</p> -->
     <LayoutBase :usuario="usuario" :onLogout="cerrarSesion">
         <h2>Bienvenido al Panel de Administrador</h2>
+        <chart></chart>
     </LayoutBase>
 </template>

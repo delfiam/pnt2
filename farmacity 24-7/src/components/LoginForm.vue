@@ -62,10 +62,10 @@ async function handleLogin() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Email</label>
+            <label className="block text-sm font-medium text-gray-700">Usuario</label>
             <input
-              type="email"
-              name="email"
+              type="text"
+              name="user"
             v-model="username"
               required
               className="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:ring-green-600 focus:border-green-600"
@@ -78,10 +78,7 @@ async function handleLogin() {
               <a href="#" className="text-sm text-green-600 hover:underline">¿Olvidaste tu contraseña?</a>
             </div>
             <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={handleChange}
+            v-model="password" type="password"
               required
               className="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:ring-green-600 focus:border-green-600"
             />

@@ -21,14 +21,14 @@ import PedidosView from './pages/PedidosView.vue'
 
 // Definir rutas
 const routes = [
-  { path: '/', component: Home },
+  //{ path: '/', component: Home },
   { path: '/carrito', component: Carrito },
   { path: '/checkout', component: Checkout },
   { path: '/carritoPagina', component: CarritoPagina },
-  { path: '/login', name: 'Login', component: Login },
+  { path: '/', name: 'Login', component: Login },
   { path: '/register', name: 'Register', component: Register },
   {
-    path: '/cliente', name: 'Cliente', component: Cliente,
+    path: '/cliente', name: 'Home', component: Home,
     meta: { autorizacion: true, rol: ['cliente', 'admin'] }
   },
   {

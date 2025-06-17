@@ -7,10 +7,11 @@ import { obtenerUsuarioActual } from '@/store/auth'
 import PedidosView from '@/pages/PedidosView.vue'
 
 const routes = [
-  { path: '/', name: 'Home', component: Landing},
-  { path: '/login', name: 'Login', component: Login },
+  //{ path: '/home', name: 'Home', component: Landing},
+  { path: '/', name: 'Login', component: Login },
+   { path: '/login', name: 'Login', component: Login },
   { path: '/register', name: 'Register', component: Register },
-  { path: '/cliente', name: 'Cliente', component: Cliente,
+  { path: '/cliente', name: 'Home', component: Home,
     meta: {autorizacion: true, rol: ['cliente', 'admin']}
   },
   { path: '/admin', name: 'Admin', component: Admin,
