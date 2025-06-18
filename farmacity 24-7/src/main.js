@@ -27,6 +27,8 @@ const routes = [
   { path: '/carritoPagina', component: CarritoPagina },
   { path: '/', name: 'Login', component: Login },
   { path: '/register', name: 'Register', component: Register },
+    { path: '/login', name: 'Login', component: Login },
+
   {
     path: '/cliente', name: 'Home', component: Home,
     meta: { autorizacion: true, rol: ['cliente', 'admin'] }
@@ -60,7 +62,15 @@ router.beforeEach((to, from, next) => {
   auth.loadUserFromLocalStorage() // Esto no retorna nada, solo carga el usuario en el estado
 
   const usuario = auth.currentUser
-
+if (to.path === '/') {
+    if (usuario && usuario.rol === 'admin') {
+      return next('/admin')
+    } else if (usuario && usuario.rol === 'cliente') {
+      return next('/cliente')
+    } else {
+      return next('/login')
+    }
+  }
   if (!to.meta.autorizacion) {
     return next()
   }
