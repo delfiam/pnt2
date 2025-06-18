@@ -1,5 +1,5 @@
 // src7store/carrito.js
-
+//chequear forma de escribir (optionAPI es la que no se usa), compositionAPI (es la que se usa)
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import { useAuthStore } from './auth'
@@ -9,9 +9,22 @@ export const useCartStore = defineStore('cart', {
     state: () => ({
         productos: [], // Array de productos en el carrito
         error: null,   // Para manejar errores
-        saving: false  // Estado de carga durante la compra
+        saving: false,  // Estado de carga durante la compra
     }),
-
+    getters: {
+        subtotal(state) {
+            return state.productos.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
+        },
+        descuentoTotal(state) {
+            return state.productos.reduce((acc, p) => acc + (p.descuento * p.precio * p.cantidad), 0);
+        },
+        total(state) {
+            return state.productos.reduce((acc, p) => acc + ((1 - p.descuento) * p.precio) * p.cantidad, 0);
+        },
+        cantidadTotal(state) {
+            return state.productos.reduce((acc, p) => acc + p.cantidad, 0);
+        }
+    },
     actions: {
         agregarItem(producto, cantidad) {
             this.error = null
@@ -28,16 +41,16 @@ export const useCartStore = defineStore('cart', {
             } else {
                 // Si no existe, agregar al carrito
                 this.productos.push({
-                    id: producto.id,
-                    cantidad,
-                    precioLista: producto.precio,
-                    precioVenta: producto.precioVenta
+                    ...producto,
+                    cantidad: cantidad
                 })
+                console.log('Producto agregado al carrito:', this.productos)
             }
         },
 
         retirarItem(id) {
             this.productos = this.productos.filter(p => p.id !== id)
+            console.log(this.productos)
         },
 
         async cerrarCompra() {
@@ -79,5 +92,11 @@ export const useCartStore = defineStore('cart', {
 
             return resumen
         }
-    }
-})
+    },
+      persist: {
+    paths: ['productos'], 
+    storage: localStorage  
+  }
+
+}
+)

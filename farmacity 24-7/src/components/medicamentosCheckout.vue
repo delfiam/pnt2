@@ -23,8 +23,7 @@ const props = defineProps({
         class="h-[100px] w-full object-contain mb-4"
       />
       <h5 class="text-base font-semibold text-gray-800 mb-1">{{ medicamento.nombre }}</h5>
-      <p class="text-green-600 font-bold text-lg mb-1">  
-        <!-- agregar descuento con precio total tachado -->
+      <p class="text-green-600 font-bold text-lg mb-1">
         ${{ medicamento.precio }}
       </p>
       <p class="text-xs text-gray-600 leading-snug line-clamp-3">
@@ -33,10 +32,10 @@ const props = defineProps({
     </div>
 
     <button
-    @click="carritoStore.agregarItem(medicamento, 1)"
+    @click="carritoStore.retirarItem(medicamento.id)"
       class="mt-4 bg-green-600 hover:bg-green-700 text-white text-sm py-2 rounded-md transition"
     >
-      Agregar al carrito
+      Eliminar
     </button>
   </div>
 </template>

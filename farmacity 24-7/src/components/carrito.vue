@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="carrito"
-    :class="{ 'carrito-abierto': isCarritoVisible }"
-  >
+  <div class="carrito" :class="{ 'carrito-abierto': isCarritoVisible }">
     <div class="carrito-header">
       <h3>Tu Carrito</h3>
       <button @click="cerrarCarrito" class="cerrar-carrito-btn">
@@ -10,35 +7,31 @@
       </button>
     </div>
     <div class="carrito-contenido">
-      <ul v-if="carritoItems.length > 0">
-        <li v-for="item in carritoItems" :key="item.id">
-          {{ item.nombre }} - ${{ item.precio }}
+      <ul>
+        <li v-for="(item, index) in carritoItems" :key="index">
+          <ProductosCarrito :medicamento="item" />
         </li>
       </ul>
-      <p v-else>El carrito está vacío.</p>
+      <p v-if="carritoItems.length === 0">Tu carrito está vacío.</p>
     </div>
     <div class="carrito-footer">
-      <button @click="irAComprar" class="ir-a-comprar-btn">Ir a comprar</button>
+      <button v-if="carritoItems.length > 0" @click="irAComprar" class="ir-a-comprar-btn">Ir a comprar</button>
     </div>
   </div>
-  <div
-    v-if="isCarritoVisible"
-    class="fondo-oscuro"
-    @click="cerrarCarrito"
-  ></div>
+  <div v-if="isCarritoVisible" class="fondo-oscuro" @click="cerrarCarrito"></div>
 </template>
 
 <script setup>
-import { ref, defineProps, defineEmits } from 'vue';
-import { useRouter } from 'vue-router'; 
+import { useCartStore } from '@/store/carrito';
+import { ref, defineProps, defineEmits, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import ProductosCarrito from './productosCarrito.vue';
 const props = defineProps({
   isCarritoVisible: Boolean
 });
-
-const carritoItems = ref([
-  { id: 1, nombre: 'Producto C', precio: 15 },
-  { id: 2, nombre: 'Producto D', precio: 25 },
-]);
+const carritoStore = useCartStore();
+const carritoItems = computed(() => carritoStore.productos);
+console.log("carritoitems: ", carritoItems);
 
 const emit = defineEmits(['update:isCarritoVisible']);
 const router = useRouter();
@@ -48,8 +41,9 @@ const cerrarCarrito = () => {
 };
 
 const irAComprar = () => {
-  router.push('/checkout'); 
-  emit('update:isCarritoVisible', false); 
+  carritoStore.cerrarCompra();
+  router.push('/checkout');
+  emit('update:isCarritoVisible', false);
 };
 </script>
 
@@ -101,8 +95,8 @@ const irAComprar = () => {
 
 .carrito-contenido {
   padding: 20px;
-  flex-grow: 1; 
-  overflow-y: auto; 
+  flex-grow: 1;
+  overflow-y: auto;
 }
 
 .carrito-contenido ul {
@@ -124,7 +118,8 @@ const irAComprar = () => {
   padding: 15px 20px;
   border-top: 1px solid #eee;
   display: flex;
-  justify-content: flex-end; /* Alinea el botón a la derecha */
+  justify-content: flex-end;
+  /* Alinea el botón a la derecha */
 }
 
 .ir-a-comprar-btn {
@@ -154,7 +149,7 @@ const irAComprar = () => {
   transition: opacity 3.3s ease-in-out;
 }
 
-.carrito-abierto + .fondo-oscuro {
+.carrito-abierto+.fondo-oscuro {
   opacity: 1;
   pointer-events: auto;
 }

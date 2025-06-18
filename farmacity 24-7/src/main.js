@@ -4,7 +4,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { createPinia } from 'pinia'
-
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import CarritoPagina from './pages/CarritoPagina.vue'
 import Carrito from './components/carrito.vue'
 import Checkout from './pages/checkout.vue'
@@ -46,13 +46,13 @@ const router = createRouter({
   routes
 })
 const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
 
 // Crear app y montar
 const app = createApp(App)
 app.use(pinia)
 app.use(router)
 
-// ⚠️ Después de montar Pinia, podés usar la store
 const auth = useAuthStore()
 
 // Proteger rutas
@@ -76,5 +76,4 @@ router.beforeEach((to, from, next) => {
   return next('/login')
 })
 
-// Finalmente montás la app
 app.mount('#app')

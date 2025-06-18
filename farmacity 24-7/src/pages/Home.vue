@@ -30,7 +30,7 @@ onMounted(async () => {
         640: { slidesPerView: 3.2, spaceBetween: 10 },
         1024: { slidesPerView: 5, spaceBetween: 12 }
       }" class="mySwiper w-full">
-        <SwiperSlide v-for="(medicamento, index) in medicamentos.filter(m => m.oferta)" :key="index">
+        <SwiperSlide v-for="(medicamento, index) in medicamentos.filter(m => m.descuento != 0)" :key="index">
           <medicamentosCard :medicamento="medicamento" />
         </SwiperSlide>
       </Swiper>

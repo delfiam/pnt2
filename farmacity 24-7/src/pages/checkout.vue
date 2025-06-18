@@ -8,30 +8,26 @@
             <strong>Tu carrito</strong>
           </div>
           <div class="card-body">
+          
             <div class="d-flex mb-3">
-              <img src="https://http2.mlstatic.com/D_NQ_NP_2X_931898-MLA71718971365_092023-F.webp" class="img-thumbnail me-3" style="width: 80px;" />
-              <div>
-                <h6 class="mb-0">Ibuprofeno</h6>
-                <small>400 MG</small><br />
-                <span class="fw-bold">$2000</span>
-              </div>
-            </div>
-            <div class="d-flex mb-3">
-              <img src="https://http2.mlstatic.com/D_NQ_NP_2X_870736-MLA50813771200_072022-F.webp" class="img-thumbnail me-3" style="width: 80px;" />
-              <div>
-                <h6 class="mb-0">Cetirizina en tabletas</h6>
-                <small>10 mg</small><br />
-                <span class="fw-bold">$15.000</span>
-              </div>
+                <ul>
+        <li v-for="(item, index) in carritoItems" :key="index">
+          <MedicamentosCheckout :medicamento="item" />
+        </li>
+      </ul>
             </div>
             <hr />
             <div class="d-flex justify-content-between">
               <span>Subtotal</span>
-              <strong>$1.389.998</strong>
+              <strong>${{ subTotal.toFixed(2) }}</strong>
+            </div>
+             <div class="d-flex justify-content-between">
+              <span>Descuento total</span>
+              <strong>${{ totalDescuento.toFixed(2) }}</strong>
             </div>
             <div class="d-flex justify-content-between fs-5">
               <span>Total</span>
-              <strong>$1.389.998</strong>
+              <strong>${{ totalCarrito.toFixed(2) }}</strong>
             </div>
             <router-link to="/carrito" class="d-block mt-3 text-decoration-none text-primary">← Volver al carrito</router-link>
           </div>
@@ -70,10 +66,7 @@
                   <span class="input-group-text">+54</span>
                   <input type="tel" class="form-control" id="telefono" placeholder="1123456789" v-model="formData.telefono">
                 </div>
-                <div class="form-check mt-2">
-                  <input class="form-check-input" type="checkbox" id="celular" v-model="formData.esCelular">
-                  <label class="form-check-label" for="celular">Es un celular</label>
-                </div>
+                
               </div>
               <div class="form-check mb-3">
                 <input class="form-check-input" type="checkbox" id="promos" v-model="formData.recibirPromos">
@@ -160,9 +153,15 @@
 
 <script setup>
 import paymentMethod from '@/components/paymentMethod.vue';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
-
+import MedicamentosCheckout from '@/components/medicamentosCheckout.vue';
+import { useCartStore } from '@/store/carrito';
+const carritoStore = useCartStore();
+const carritoItems = computed(() => carritoStore.productos);
+const subTotal = computed(() => carritoStore.subtotal);
+const totalCarrito = computed(() => carritoStore.total);
+const totalDescuento = computed(() => carritoStore.descuentoTotal);
 const step = ref(1);
 const router = useRouter();
 const formData = ref({
