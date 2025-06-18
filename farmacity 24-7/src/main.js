@@ -16,6 +16,7 @@ import Admin from '@/pages/Admin.vue'
 import PiniaTest from './pages/PiniaTest.vue'
 import { useAuthStore } from './store/auth'
 import TestCarrito from './pages/TestCarrito.vue'
+import VentasDashboard from '@/pages/VentasDashboard.vue'
 
 // Definir rutas
 const routes = [
@@ -34,7 +35,11 @@ const routes = [
     meta: { autorizacion: true, rol: ['admin'] }
   }, 
   { path: '/pinia-test', name: 'PiniaTest', component: PiniaTest },
-  { path: '/testCarrito', name: 'TestCarrito', component: TestCarrito }
+  { path: '/testCarrito', name: 'TestCarrito', component: TestCarrito },
+  { path: '/ventas', name: 'VentasDashboard', component: VentasDashboard,
+    meta: { autorizacion: true, rol: ['admin']}
+   }
+  
 ]
 
 // Crear router y pinia

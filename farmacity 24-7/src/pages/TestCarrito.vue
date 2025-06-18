@@ -60,10 +60,10 @@ async function cerrar() {
     <hr class="my-6" />
 
     <h2 class="text-lg font-semibold">Contenido del carrito:</h2>
-    <div v-if="cartStore.productos.length === 0">Carrito vacío</div>
+    <div v-if="cartStore.itemsCarrito.length === 0">Carrito vacío</div>
     <ul>
       <li
-        v-for="item in cartStore.productos"
+        v-for="item in cartStore.itemsCarrito"
         :key="item.id"
         class="flex justify-between"
       >
