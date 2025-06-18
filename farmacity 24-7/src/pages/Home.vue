@@ -6,6 +6,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import { Navigation } from 'swiper/modules'
 import axios from 'axios';
+import Navbar from '@/components/Navbar.vue';
 const medicamentos = ref([]);
 import { ref, onMounted } from 'vue';
 onMounted(async () => {
@@ -18,7 +19,7 @@ onMounted(async () => {
 });
 </script>
 <template>
-
+<Navbar />
   <div class="p-6">
     <img src="../assets/Farmacity_logo.png" alt="Farmacity Logo" class="w-1/5 mx-auto mb-4" />
     <div class="p-6 bg-white rounded-xl shadow mb-10">
