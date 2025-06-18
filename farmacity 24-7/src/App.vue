@@ -10,8 +10,8 @@ const toggleCarrito = () => {
 };
 </script>
 <template>
-<Navbar @toggle-carrito="toggleCarrito" />  <router-view />
-  <Carrito :isCarritoVisible="mostrarCarrito" @update:isCarritoVisible="mostrarCarrito = $event" />
+  <router-view />
+  
 </template>
 
 

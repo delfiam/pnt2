@@ -55,12 +55,11 @@ async function handleLogin() {
      <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
         <div className="flex flex-col items-center mb-6">
-          <img src="../assets/Farmacity_logo.png" alt="Farmacity Logo" class="w-1/5 mx-auto mb-4" />
-          <h2 className="text-lg font-semibold mt-2">Ingresar</h2>
+          <img src="../assets/Farmacity_logo.png" alt="Farmacity Logo" class=" mx-auto mb-4" />
           <p className="text-sm text-gray-500 mt-1">Ingresá tu email para acceder a tu cuenta</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form  @submit.prevent="handleLogin" className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">Usuario</label>
             <input
@@ -75,7 +74,6 @@ async function handleLogin() {
           <div>
             <div className="flex justify-between items-center">
               <Label className="block text-sm font-medium text-gray-700">Contraseña</Label>
-              <a href="#" className="text-sm text-green-600 hover:underline">¿Olvidaste tu contraseña?</a>
             </div>
             <input
             v-model="password" type="password"
@@ -84,35 +82,33 @@ async function handleLogin() {
             />
           </div>
           <button
-            type="submit"
+            type="submit" @click="iniciarSesion"
             className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-md transition"
           
         > Ingresar </button>
           
-  
+   <p v-if="auth.error" style="color:red">{{ auth.error }}</p>
         </form>
 
-        <p className="mt-4 text-center text-sm text-gray-600">
-          ¿No tenés una cuenta? <a href="#" className="text-green-600 hover:underline">Registrate</a>
-        </p>
+        
       </div>
     </div>
-  <div class="p-4 bg-white">
-    
-    <h2>Login de usuario</h2>
-    <form @submit.prevent="handleLogin">
-      <label>
-        Usuario:
-        <input v-model="username" type="text" />
-      </label><br />
-      <label>
-        Contraseña:
-        <input v-model="password" type="password" />
-      </label><br />
-      <button @click="iniciarSesion">Iniciar Sesión</button>
-      
-    </form>
-    <p v-if="auth.error" style="color:red">{{ auth.error }}</p>
-    <p v-if="auth.currentUser">Logueado como: {{ auth.currentUser.username }} ({{ auth.currentUser.rol }})</p>
-  </div>
+
 </template>
+<style scoped>
+input {
+ border:rgba(0, 0, 0, 0.5) 1px solid;
+ border-radius: 4px;
+  padding: 3px;
+  width: 100%;
+ 
+}
+input:focus {
+  outline: none;
+  border-color: #4CAF50; 
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); 
+}
+button {
+  margin-top: 10px;
+}
+</style>
