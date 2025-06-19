@@ -42,9 +42,7 @@ const routes = [
   { path: '/testCarrito', name: 'TestCarrito', component: TestCarrito },
   { path: '/ventas', name: 'VentasDashboard', component: VentasDashboard,
     meta: { autorizacion: true, rol: ['admin']}
-   }
-  
-
+   },
   { path: '/pedidos', name: 'Pedidos', component: PedidosView }
 ]
 
