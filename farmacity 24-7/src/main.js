@@ -4,7 +4,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { createPinia } from 'pinia'
-
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import CarritoPagina from './pages/CarritoPagina.vue'
 import Carrito from './components/carrito.vue'
 import Checkout from './pages/checkout.vue'
@@ -17,17 +17,21 @@ import PiniaTest from './pages/PiniaTest.vue'
 import { useAuthStore } from './store/auth'
 import TestCarrito from './pages/TestCarrito.vue'
 import VentasDashboard from '@/pages/VentasDashboard.vue'
+import PedidosView from './pages/PedidosView.vue'
+
 
 // Definir rutas
 const routes = [
-  { path: '/', component: Home },
+  //{ path: '/', component: Home },
   { path: '/carrito', component: Carrito },
   { path: '/checkout', component: Checkout },
   { path: '/carritoPagina', component: CarritoPagina },
-  { path: '/login', name: 'Login', component: Login },
+  { path: '/', name: 'Login', component: Login },
   { path: '/register', name: 'Register', component: Register },
+    { path: '/login', name: 'Login', component: Login },
+
   {
-    path: '/cliente', name: 'Cliente', component: Cliente,
+    path: '/cliente', name: 'Home', component: Home,
     meta: { autorizacion: true, rol: ['cliente', 'admin'] }
   },
   {
@@ -40,6 +44,8 @@ const routes = [
     meta: { autorizacion: true, rol: ['admin']}
    }
   
+
+  { path: '/pedidos', name: 'Pedidos', component: PedidosView }
 ]
 
 // Crear router y pinia
@@ -48,13 +54,13 @@ const router = createRouter({
   routes
 })
 const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
 
 // Crear app y montar
 const app = createApp(App)
 app.use(pinia)
 app.use(router)
 
-// ⚠️ Después de montar Pinia, podés usar la store
 const auth = useAuthStore()
 
 // Proteger rutas
@@ -62,7 +68,15 @@ router.beforeEach((to, from, next) => {
   auth.loadUserFromLocalStorage() // Esto no retorna nada, solo carga el usuario en el estado
 
   const usuario = auth.currentUser
-
+if (to.path === '/') {
+    if (usuario && usuario.rol === 'admin') {
+      return next('/admin')
+    } else if (usuario && usuario.rol === 'cliente') {
+      return next('/cliente')
+    } else {
+      return next('/login')
+    }
+  }
   if (!to.meta.autorizacion) {
     return next()
   }
@@ -78,5 +92,4 @@ router.beforeEach((to, from, next) => {
   return next('/login')
 })
 
-// Finalmente montás la app
 app.mount('#app')

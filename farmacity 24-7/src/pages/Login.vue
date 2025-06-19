@@ -24,15 +24,13 @@ const redirigirSegunRol = (usuario) => {
 </script>
 
 <template>
-    <div>
-        <h2>Inicar Sesión</h2>
-        <p v-if="auth.currentUser">Usuario: {{ auth.currentUser.username }} ROL: {{ auth.currentUser.rol }}</p>
+      <div>
+      
+      
         <LoginForm @login-exitoso="redirigirSegunRol" />
-        <p>¿No tienes cuenta? <router-link to="/register">Regístrate aquí</router-link></p>
-    </div>
-    <div>
-    <router-link to='/'>
-      <button>IR AL INICIO</button>
-    </router-link> 
-  </div>
+        
+   
+
+      </div>
+  
 </template>

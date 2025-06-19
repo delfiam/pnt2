@@ -1,5 +1,5 @@
 // src7store/carrito.js
-
+//chequear forma de escribir (optionAPI es la que no se usa), compositionAPI (es la que se usa)
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import { useAuthStore } from './auth'
@@ -11,9 +11,22 @@ export const useCartStore = defineStore('cart', {
     state: () => ({
         itemsCarrito: [], // Array de productos en el carrito
         error: null,   // Para manejar errores
-        saving: false  // Estado de carga durante la compra
+        saving: false,  // Estado de carga durante la compra
     }),
-
+    getters: {
+        subtotal(state) {
+            return state.productos.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
+        },
+        descuentoTotal(state) {
+            return state.productos.reduce((acc, p) => acc + (p.descuento * p.precio * p.cantidad), 0);
+        },
+        total(state) {
+            return state.productos.reduce((acc, p) => acc + ((1 - p.descuento) * p.precio) * p.cantidad, 0);
+        },
+        cantidadTotal(state) {
+            return state.productos.reduce((acc, p) => acc + p.cantidad, 0);
+        }
+    },
     actions: {
         agregarItem(producto, cantidad) {
             this.error = null
@@ -79,6 +92,7 @@ export const useCartStore = defineStore('cart', {
                 nuevoItem.precioVenta = precioVenta
                 this.itemsCarrito.push(nuevoItem)
                 // ver si fecha y usuario van por fuera del objeto, en el objeto transacción o si cada objeto los guarda
+
             }
         },
 
@@ -135,5 +149,11 @@ export const useCartStore = defineStore('cart', {
 
             return resumen
         }
-    }
-})
+    },
+      persist: {
+    paths: ['productos'], 
+    storage: localStorage  
+  }
+
+}
+)
