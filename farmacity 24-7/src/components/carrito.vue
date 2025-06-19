@@ -23,6 +23,7 @@
 
 <script setup>
 import { useCartStore } from '@/store/carrito';
+import { useProductosStore } from '@/store/product';
 import { ref, defineProps, defineEmits, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import ProductosCarrito from './productosCarrito.vue';
@@ -30,7 +31,8 @@ const props = defineProps({
   isCarritoVisible: Boolean
 });
 const carritoStore = useCartStore();
-const carritoItems = computed(() => carritoStore.productos);
+const carritoItems = carritoStore.itemsCarrito;
+const productosStore = useProductosStore();
 console.log("carritoitems: ", carritoItems);
 
 const emit = defineEmits(['update:isCarritoVisible']);

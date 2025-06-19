@@ -19,7 +19,6 @@ onMounted(async () => {
 });
 </script>
 <template>
-<Navbar />
   <div class="p-6">
     <img src="../assets/Farmacity_logo.png" alt="Farmacity Logo" class="w-1/5 mx-auto mb-4" />
     <div class="p-6 bg-white rounded-xl shadow mb-10">

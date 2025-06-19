@@ -15,21 +15,22 @@ export const useCartStore = defineStore('cart', {
     }),
     getters: {
         subtotal(state) {
-            return state.productos.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
+            return state.itemsCarrito.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
         },
         descuentoTotal(state) {
-            return state.productos.reduce((acc, p) => acc + (p.descuento * p.precio * p.cantidad), 0);
+            return state.itemsCarrito.reduce((acc, p) => acc + (p.descuento * p.precio * p.cantidad), 0);
         },
         total(state) {
-            return state.productos.reduce((acc, p) => acc + ((1 - p.descuento) * p.precio) * p.cantidad, 0);
+            return state.itemsCarrito.reduce((acc, p) => acc + ((1 - p.descuento) * p.precio) * p.cantidad, 0);
         },
         cantidadTotal(state) {
-            return state.productos.reduce((acc, p) => acc + p.cantidad, 0);
+            return state.itemsCarrito.reduce((acc, p) => acc + p.cantidad, 0);
         }
     },
     actions: {
         agregarItem(producto, cantidad) {
             this.error = null
+            console.log(this.itemsCarrito)
             const productosStore = useProductosStore()
 
             if (!producto || !producto.id || cantidad <= 0) {
@@ -97,6 +98,7 @@ export const useCartStore = defineStore('cart', {
         },
 
         retirarItem(id) {
+            console.log(this.itemsCarrito)
             this.itemsCarrito = this.itemsCarrito.filter(p => p.id !== id)
         },
 

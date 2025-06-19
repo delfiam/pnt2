@@ -18,13 +18,11 @@
         <button class="text-gray-700 hover:text-green-600 font-medium focus:outline-none">
           Ingresar
         </button>
-        <div v-if="showDropdown" class="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-50">
+       
           <RouterLink to="/Login"
             class="block px-4 py-2  text-sm text-gray-800 font-semibold text-lg hover:text-green-600">Iniciar sesión
           </RouterLink>
-          <RouterLink to="/Register" class="block px-4 py-2 text-sm font-semibold text-lg hover:text-green-600">
-            Registrarse</RouterLink>
-        </div>
+
       </div>
 
 
