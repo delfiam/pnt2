@@ -34,7 +34,7 @@ export const useProductosStore = defineStore('productos', {
             // // actualizamos en MockAPI, descomentar cuando el metodo put este configurado en server.
             // await axios.put(`https://mockapi.io/productos/${item.id}`, {
             //   ...producto,
-            //   stock: nuevoStock
+            //   stock: nuevoStock //ERROR: lo que hay que hacer es gettear cada producto, actualizarlo y postearlo, o bien todo el array.
             // })
             console.log(`haciendo put de producto: ${producto.nombre} nuevo stock: ${producto.stock}`)
             // también lo actualizamos localmente
