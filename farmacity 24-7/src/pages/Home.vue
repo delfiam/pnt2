@@ -7,16 +7,17 @@ import 'swiper/css/navigation'
 import { Navigation } from 'swiper/modules'
 import axios from 'axios';
 import Navbar from '@/components/Navbar.vue';
-const medicamentos = ref([]);
-import { ref, onMounted } from 'vue';
+import { useProductosStore } from '@/store/product';
+import { ref, onMounted, computed } from 'vue';
+const productosStore = useProductosStore();
+const medicamentos = computed(() => productosStore.productos);
+
 onMounted(async () => {
-  try {
-    const response = await axios.get('https://682d2cee4fae188947551d71.mockapi.io/stock/stock');
-    medicamentos.value = response.data;
-  } catch (error) {
-    console.error('Error fetching medicamentos:', error);
+  if (productosStore.productos.length === 0) {
+    await productosStore.fetchProductos();
   }
 });
+
 </script>
 <template>
   <div class="p-6">

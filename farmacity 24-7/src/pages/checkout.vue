@@ -11,7 +11,7 @@
           
             <div class="d-flex mb-3">
                 <ul>
-        <li v-for="(item, index) in carritoItems" :key="index">
+        <li v-for="(item, index) in carritoItems" :key="item.id">
           <MedicamentosCheckout :medicamento="item" />
         </li>
       </ul>
@@ -29,7 +29,6 @@
               <span>Total</span>
               <strong>${{ totalCarrito.toFixed(2) }}</strong>
             </div>
-            <router-link to="/carrito" class="d-block mt-3 text-decoration-none text-primary">← Volver al carrito</router-link>
           </div>
         </div>
       </div>
@@ -158,7 +157,7 @@ import { useRouter } from 'vue-router';
 import MedicamentosCheckout from '@/components/medicamentosCheckout.vue';
 import { useCartStore } from '@/store/carrito';
 const carritoStore = useCartStore();
-const carritoItems = computed(() => carritoStore.productos);
+const carritoItems = computed(() => carritoStore.itemsCarrito);
 const subTotal = computed(() => carritoStore.subtotal);
 const totalCarrito = computed(() => carritoStore.total);
 const totalDescuento = computed(() => carritoStore.descuentoTotal);

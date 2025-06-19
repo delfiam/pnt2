@@ -8,7 +8,7 @@
     </div>
     <div class="carrito-contenido">
       <ul>
-        <li v-for="(item, index) in carritoItems" :key="index">
+        <li v-for="(item, index) in carritoItems" :key="item.id">
           <ProductosCarrito :medicamento="item" />
         </li>
       </ul>
@@ -31,7 +31,7 @@ const props = defineProps({
   isCarritoVisible: Boolean
 });
 const carritoStore = useCartStore();
-const carritoItems = carritoStore.itemsCarrito;
+const carritoItems = computed(() => carritoStore.itemsCarrito);
 const productosStore = useProductosStore();
 console.log("carritoitems: ", carritoItems);
 
@@ -43,7 +43,6 @@ const cerrarCarrito = () => {
 };
 
 const irAComprar = () => {
-  carritoStore.cerrarCompra();
   router.push('/checkout');
   emit('update:isCarritoVisible', false);
 };
