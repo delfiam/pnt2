@@ -69,7 +69,7 @@
       <p class="text-muted mt-3">Serás redirigido a Apple Pay para completar tu compra.</p>
     </div>
 
-    <button class="continue-button" @click="processPayment">Continuar</button>
+    <button class="continue-button" @click="processPayment">Finalizar Compra</button>
   </div>
 </template>
 
@@ -106,12 +106,13 @@ const processPayment = () => {
 
 <style scoped>
 .payment-container {
-  background-color: #212529; 
-  color: white;
+  background-color: #ffffff;
+  color: black;
+  border-color: #343a40;
   padding: 24px;
   border-radius: 12px;
-  width: 100%; 
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .payment-title {
@@ -121,7 +122,7 @@ const processPayment = () => {
 
 .payment-subtitle {
   font-size: 0.9rem;
-  color: #adb5bd; 
+  color: #495057;
   margin-bottom: 16px;
 }
 
@@ -135,8 +136,8 @@ const processPayment = () => {
   flex: 1;
   margin: 0 4px;
   background-color: transparent;
-  color: white;
-  border: 1px solid #555;
+  color: black;
+  border: 1px solid #ababab;
   padding: 12px;
   border-radius: 8px;
   cursor: pointer;
@@ -145,9 +146,9 @@ const processPayment = () => {
 
 .payment-button.selected,
 .payment-button:hover {
-  background-color: white;
-  color: black;
-  border-color: white;
+  background-color: black;
+  color: white;
+  border-color: black;
 }
 
 .input-field,
@@ -156,9 +157,9 @@ const processPayment = () => {
   padding: 10px;
   margin-bottom: 12px;
   border-radius: 6px;
-  border: 1px solid #555;
-  background-color: #343a40; 
-  color: white;
+  border: 1px solid #ababab;
+  background-color: #f8f9fa;
+  color: black;
   font-size: 0.95rem;
 }
 
@@ -179,8 +180,8 @@ const processPayment = () => {
 .continue-button {
   width: 100%;
   padding: 12px;
-  background-color: white;
-  color: black;
+  background-color: black;
+  color: white;
   border: none;
   border-radius: 6px;
   font-weight: bold;
@@ -189,6 +190,6 @@ const processPayment = () => {
 }
 
 .continue-button:hover {
-  background-color: #e0e0e0;
+  background-color: #343a40;
 }
 </style>
