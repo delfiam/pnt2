@@ -32,7 +32,7 @@ export const useCartStore = defineStore('cart', {
       const productosStore = useProductosStore();
       const authStore = useAuthStore();
 
-      if (!producto || !producto.id || cantidad <= 0) {
+      if (!producto || !producto.id ) {
         this.error = 'Producto inválido o cantidad incorrecta';
         return;
       }

@@ -22,7 +22,7 @@ function handleAgregar() {
 <template>
   <div class="relative w-[240px] h-[360px] border rounded-xl shadow-md flex flex-col justify-between p-4 bg-white">
 
-    <div v-if="medicamento.oferta"
+    <div v-if="medicamento.descuento"
       class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded shadow">
       -{{ medicamento.descuento * 100 }}%
     </div>

@@ -1,46 +1,31 @@
 <template>
-  <RouterLink to="/pedidos">
-  <button class="text-sm font-bold text-blue-500 hover:underline">Pedidos</button>
-</RouterLink>
+  <nav class="bg-white shadow-md w-full">
+    <div class="container mx-auto flex items-center justify-between px-4 py-3">
+      <RouterLink to="/" class="flex-shrink-0">
+        <img
+          src="../assets/Farmacity_logo.png"
+          alt="Logo"
+          class="h-8"
+        />
+      </RouterLink>
 
-  <nav class="relative bg-white shadow-md px-4 py-3 flex items-center justify-between">
-    <div class="flex items-center gap-2">
-      <RouterLink to="/"
-            class="block px-4 py-2  text-sm text-gray-800 font-semibold text-lg hover:text-green-600">
-        
-        <img src="../assets/Farmacity_logo.png" alt="Logo" class="logo" />
-   </RouterLink>
-    </div>
-
-
-    <div class="flex items-center gap-4">
-      <div class="relative" @click="toggleDropdown" v-if="!auth.currentUser">
-        <button class="text-gray-700 hover:text-green-600 font-medium focus:outline-none">
-          Ingresar
-        </button>
-       
-          <RouterLink to="/Login"
-            class="block px-4 py-2  text-sm text-gray-800 font-semibold text-lg hover:text-green-600">Iniciar sesión
-          </RouterLink>
-
-      </div>
-
-
-      <div @click="$emit('toggle-carrito')" class="text-2xl text-gray-700 hover:text-green-600 cursor-pointer">
-        🛒
-      </div>
-      <div class="hidden md:block">
+      <div class="flex items-center space-x-4 gap-6">
+        <ShoppingCartIcon
+          v-if="!isCheckout"
+          @click="$emit('toggle-carrito')"
+          class="w-6 h-6 text-gray-700 hover:text-green-600 cursor-pointer"
+        />
         <UserStatus />
       </div>
-
     </div>
   </nav>
 </template>
 
+
 <script setup>
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
-
+import { ShoppingCartIcon, UserIcon } from '@heroicons/vue/24/outline'
 import UserStatus from '@/components/UserStatus.vue'
 import { useAuthStore } from '@/store/auth'
 defineEmits(['toggle-carrito'])
@@ -72,4 +57,5 @@ document.addEventListener('click', (e) => {
   transform: scale(1);
   transition: transform 0.2s;
 }
+
 </style>

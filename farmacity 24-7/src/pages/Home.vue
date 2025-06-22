@@ -29,14 +29,14 @@ onMounted(async () => {
       <Swiper v-if="medicamentos.length" :modules="[Navigation]" navigation :space-between="8" :breakpoints="{
         0: { slidesPerView: 2.2, spaceBetween: 8 },
         640: { slidesPerView: 3.2, spaceBetween: 10 },
-        1024: { slidesPerView: 5, spaceBetween: 12 }
+        1024: { slidesPerView: 4, spaceBetween: 12 }
       }" class="mySwiper w-full">
         <SwiperSlide v-for="(medicamento, index) in medicamentos.filter(m => m.descuento != 0)" :key="index">
           <medicamentosCard :medicamento="medicamento" />
         </SwiperSlide>
       </Swiper>
     </div>
-
+<br>
     <div class="p-6 bg-white rounded-xl shadow mb-10">
       <h2 class="text-2xl font-bold mb-6">Sin receta</h2>
 
@@ -44,14 +44,14 @@ onMounted(async () => {
       <Swiper v-if="medicamentos.length" :modules="[Navigation]" navigation :space-between="8" :breakpoints="{
         0: { slidesPerView: 2.2, spaceBetween: 8 },
         640: { slidesPerView: 3.2, spaceBetween: 10 },
-        1024: { slidesPerView: 5, spaceBetween: 12 }
+        1024: { slidesPerView: 4, spaceBetween: 12 }
       }" class="mySwiper w-full">
         <SwiperSlide v-for="(medicamento, index) in medicamentos.filter(m => m.necesita_receta == false)" :key="index">
           <medicamentosCard :medicamento="medicamento" />
         </SwiperSlide>
       </Swiper>
     </div>
-
+<br>
   <div class="container">
 
     <h2>Medicamentos</h2>

@@ -20,7 +20,6 @@ import VentasDashboard from '@/pages/VentasDashboard.vue'
 import PedidosView from './pages/PedidosView.vue'
 
 
-// Definir rutas
 const routes = [
   //{ path: '/', component: Home },
   { path: '/carrito', component: Carrito },
@@ -46,7 +45,6 @@ const routes = [
   { path: '/pedidos', name: 'Pedidos', component: PedidosView }
 ]
 
-// Crear router y pinia
 const router = createRouter({
   history: createWebHistory(),
   routes

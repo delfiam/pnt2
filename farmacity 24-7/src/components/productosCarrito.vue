@@ -1,5 +1,7 @@
 <script setup>
 import { useCartStore } from '@/store/carrito';
+import { computed } from 'vue';
+import { defineProps } from 'vue';
 const carritoStore = useCartStore();
 const props = defineProps({
   medicamento: {
@@ -7,35 +9,50 @@ const props = defineProps({
     required: true
   }
 })
+const cantidadEnCarrito = computed(() => {
+  const item = carritoStore.itemsCarrito.find(p => p.id === props.medicamento.id);
+  return item?.cantidad || 0;
+});
+function aumentarCantidad() {
+  carritoStore.agregarItem(props.medicamento, 1);
+}
+
+function disminuirCantidad() {
+  if (props.medicamento.cantidad > 1) {
+    carritoStore.agregarItem(props.medicamento, -1);
+  } else {
+    carritoStore.retirarItem(props.medicamento.id);
+  }
+}
 </script>
 
 <template>
-   <div class="relative w-[240px] h-[360px] border rounded-xl shadow-md flex flex-col justify-between p-4 bg-white">
+  <div class="flex items-center justify-between border rounded-md p-2 bg-white shadow-sm w-full max-w-sm">
+    <img :src="medicamento.imagen" alt="med" class="w-12 h-12 object-contain mr-2" />
 
-    <div v-if="medicamento.oferta" class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded shadow">
-      -{{ medicamento.oferta }} Oferta
+    <div class="flex-1">
+      <p class="text-sm font-medium text-gray-800 truncate">{{ medicamento.nombre }}</p>
+    <span v-if="medicamento.descuento > 0" class="text-gray-500 line-through mr-1">
+          ${{ medicamento.precio.toFixed(2) }}
+        </span>
+        <span class="text-green-600">
+          ${{ (medicamento.precio * (1 - medicamento.descuento)).toFixed(2) }}
+        </span>
+         <div class="flex items-center mt-1 space-x-2">
+        <button @click="disminuirCantidad"
+          class="bg-gray-200 hover:bg-gray-300 text-gray-800 rounded px-2 py-0.5 text-sm">−</button>
+
+        <span class="text-sm font-semibold">{{ cantidadEnCarrito }}</span>
+
+        <button @click="aumentarCantidad"
+          class="bg-gray-200 hover:bg-gray-300 text-gray-800 rounded px-2 py-0.5 text-sm">+</button>
+      </div>
     </div>
 
-    <div>
-      <img
-        :src="medicamento.imagen"
-        alt="Imagen del medicamento"
-        class="h-[100px] w-full object-contain mb-4"
-      />
-      <h5 class="text-base font-semibold text-gray-800 mb-1">{{ medicamento.nombre }}</h5>
-      <p class="text-green-600 font-bold text-lg mb-1">
-        ${{ medicamento.precio }}
-      </p>
-      <p class="text-xs text-gray-600 leading-snug line-clamp-3">
-        {{ medicamento.descripcion }}
-      </p>
-    </div>
-
-    <button
-    @click="carritoStore.retirarItem(medicamento.id)"
-      class="mt-4 bg-green-600 hover:bg-green-700 text-white text-sm py-2 rounded-md transition"
-    >
+    <button @click="carritoStore.retirarItem(medicamento.id)"
+      class="text-green-600 hover:green-red-800 text-xs font-semibold ml-2 transition">
       Eliminar
     </button>
   </div>
 </template>
+
