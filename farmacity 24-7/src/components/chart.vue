@@ -125,17 +125,17 @@ const horizontalBarOptions = {
 
 
 const pieChartData = computed(() => {
-  const estados = {}
+  const necesita_receta = {}
   pedidos.value.forEach(p => {
-    estados[p.estado] = (estados[p.estado] || 0) + 1
+    necesita_receta[p.necesita_receta] = (necesita_receta[p.necesita_receta] || 0) + 1
   })
 
   return {
     labels: Object.keys(estados),
     datasets: [
       {
-        label: 'Pedidos por Estado',
-        data: Object.values(estados),
+        label: 'Pedidos por receta',
+        data: Object.values(necesita_receta),
         backgroundColor: [
           'rgba(255, 99, 132, 0.6)',
           'rgba(54, 162, 235, 0.6)',
