@@ -18,6 +18,7 @@ import { useAuthStore } from './store/auth'
 import TestCarrito from './pages/TestCarrito.vue'
 import VentasDashboard from '@/pages/VentasDashboard.vue'
 import PedidosView from './pages/PedidosView.vue'
+import MedicamentosAdmin from './pages/MedicamentosAdmin.vue'
 
 
 const routes = [
@@ -37,6 +38,10 @@ const routes = [
     path: '/admin', name: 'Admin', component: Admin,
     meta: { autorizacion: true, rol: ['admin'] }
   }, 
+    {
+    path: '/admin/medicamentos', name: 'Medicamentos', component: MedicamentosAdmin,
+    meta: { autorizacion: true, rol: ['cliente', 'admin'] }
+  },
   { path: '/pinia-test', name: 'PiniaTest', component: PiniaTest },
   { path: '/testCarrito', name: 'TestCarrito', component: TestCarrito },
   { path: '/ventas', name: 'VentasDashboard', component: VentasDashboard,

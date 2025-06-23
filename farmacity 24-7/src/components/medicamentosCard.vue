@@ -1,5 +1,7 @@
 <script setup>
 import { useCartStore } from '@/store/carrito';
+import {computed } from 'vue';
+import {useRoute } from 'vue-router';
 const carritoStore = useCartStore();
 const props = defineProps({
   medicamento: {
@@ -10,11 +12,13 @@ const props = defineProps({
 function handleAgregar() {
   carritoStore.agregarItem(props.medicamento, 1);
     if (carritoStore.error) {
-    console.error('❌ Error al agregar:', carritoStore.error);
+    console.error('Error al agregar:', carritoStore.error);
   } else {
-    console.log('✅ Producto agregado:', JSON.stringify(carritoStore.itemsCarrito));
+    console.log('Producto agregado:', JSON.stringify(carritoStore.itemsCarrito));
   }
 }
+const route = useRoute()
+const isAdmin = computed(() => route.path.includes('/admin') || route.path.includes('/admin/medicamentos'))
 
 
 </script>
@@ -45,7 +49,7 @@ function handleAgregar() {
       </p>
     </div>
 
-    <button @click="handleAgregar "
+    <button @click="handleAgregar " v-if="!isAdmin"
       class="mt-4 bg-green-600 hover:bg-green-700 text-white text-sm py-2 rounded-md transition">
       Agregar al carrito
     </button>

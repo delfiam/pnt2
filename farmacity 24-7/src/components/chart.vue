@@ -125,24 +125,24 @@ const horizontalBarOptions = {
 
 
 const pieChartData = computed(() => {
-  const necesita_receta = {}
-  pedidos.value.forEach(p => {
-    necesita_receta[p.necesita_receta] = (necesita_receta[p.necesita_receta] || 0) + 1
+  const counts = { without: 0, with: 0 }
+
+  pedidos.value.forEach(pedido => {
+    pedido.productos.forEach(prod => {
+      if (prod.necesita_receta) counts.with += 1
+      else counts.without += 1
+    })
   })
 
   return {
-    labels: Object.keys(estados),
+    labels: ['Sin receta', 'Con receta'],
     datasets: [
       {
-        label: 'Pedidos por receta',
-        data: Object.values(necesita_receta),
+        label: 'Medicamentos',
+        data: [counts.without, counts.with],
         backgroundColor: [
-          'rgba(255, 99, 132, 0.6)',
-          'rgba(54, 162, 235, 0.6)',
-          'rgba(255, 206, 86, 0.6)',
-          'rgba(75, 192, 192, 0.6)',
-          'rgba(153, 102, 255, 0.6)',
-          'rgba(255, 159, 64, 0.6)'
+          'rgba(54, 162, 235, 0.6)',  
+          'rgba(255, 99, 132, 0.6)'   
         ],
         borderWidth: 1
       }

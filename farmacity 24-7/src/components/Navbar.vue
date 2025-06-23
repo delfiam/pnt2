@@ -11,7 +11,7 @@
 
       <div class="flex items-center space-x-4 gap-6">
         <ShoppingCartIcon
-          v-if="!isCheckout"
+          v-if="!isCheckout && !isAdmin"
           @click="$emit('toggle-carrito')"
           class="w-6 h-6 text-gray-700 hover:text-green-600 cursor-pointer"
         />
@@ -24,9 +24,10 @@
 
 <script setup>
 import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRoute } from 'vue-router'
 import { ShoppingCartIcon, UserIcon } from '@heroicons/vue/24/outline'
 import UserStatus from '@/components/UserStatus.vue'
+import { computed } from 'vue'
 import { useAuthStore } from '@/store/auth'
 defineEmits(['toggle-carrito'])
 
@@ -36,7 +37,10 @@ const toggleDropdown = () => {
   showDropdown.value = !showDropdown.value
 }
 
+const route = useRoute()
 
+const isCheckout = computed(() => route.path.includes('/checkout') )
+const isAdmin = computed(() => route.path.includes('/admin') || route.path.includes('/admin/medicamentos'))
 document.addEventListener('click', (e) => {
   if (!(e.target.closest('nav'))) {
     showDropdown.value = false

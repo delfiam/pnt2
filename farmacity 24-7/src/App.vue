@@ -11,7 +11,7 @@ const route = useRoute()
 const carritoAbierto = ref(false)
 const toggleCarrito = () => carritoAbierto.value = !carritoAbierto.value
 
-const ocultarNavbarEnRutas = ['/login', '/admin']
+const ocultarNavbarEnRutas = ['/login']
 const mostrarNavbar = computed(() => !ocultarNavbarEnRutas.includes(route.path))
 </script>
 
