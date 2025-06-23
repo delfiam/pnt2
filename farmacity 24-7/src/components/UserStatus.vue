@@ -13,7 +13,9 @@
       </div>
       <RouterLink
         to="/pedidos"
-        class="w-full block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 !no-underline"
+         class="block px-4 py-2 text-sm !text-gray-700 hover:!text-gray-900 hover:bg-gray-50 !no-underline"
+  active-class="!text-gray-700"
+  exact-active-class="!text-gray-700"
       >
         Mis Pedidos
       </RouterLink>
