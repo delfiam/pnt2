@@ -119,6 +119,8 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import axios from 'axios'
+import { useAuthStore } from '@/store/auth'
+
 
 const API = 'https://6848c71c45f4c0f5ee6f1594.mockapi.io/Pedidos/pedidos'
 
