@@ -43,11 +43,12 @@
 </template>
 
 <script setup>
+
 const props = defineProps(['formData'])
 const emit = defineEmits(['next'])
-const handleNext = () => {
+const handleNext = async () => {
   if (props.formData.correo && props.formData.nombre && props.formData.apellido && props.formData.dni) {
-    emit('next', 2)
+     emit('next', 2)
   } else {
     alert('Por favor, completa todos los campos obligatorios del paso 1.')
   }

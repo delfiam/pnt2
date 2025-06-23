@@ -42,9 +42,11 @@ const cerrarCarrito = () => {
   emit('update:isCarritoVisible', false);
 };
 
-const irAComprar = () => {
+const irAComprar = async () => {
+  await carritoStore.cerrarCompra()
   router.push('/checkout');
   emit('update:isCarritoVisible', false);
+  
 };
 </script>
 

@@ -75,9 +75,11 @@
 
 <script setup>
 import { ref } from 'vue';
+import { patchEstadoPedido } from '@/services/productService';
+import { useCartStore } from '@/store/carrito'; 
 
 const selectedPaymentMethod = ref('card'); 
-
+const carrito = useCartStore()
 const cardDetails = ref({
   name: '',
   cardNumber: '',
@@ -94,14 +96,21 @@ const processPayment = () => {
   if (selectedPaymentMethod.value === 'card') {
     if (cardDetails.value.name && cardDetails.value.cardNumber && cardDetails.value.month && cardDetails.value.year && cardDetails.value.cvc) {
       alert('Procesando pago con tarjeta...');
+      finalizarCompra()
+      
     } else {
       alert('Por favor, completa todos los detalles de la tarjeta.');
     }
   } else {
     alert(`Procesando pago con ${selectedPaymentMethod.value}...`);
-    
+    finalizarCompra()
   }
 };
+
+const finalizarCompra = async()=>{
+  await patchEstadoPedido(localStorage.getItem('pedidoActivo'), 'en camino')
+  carrito.vaciarCarrito()
+}
 </script>
 
 <style scoped>

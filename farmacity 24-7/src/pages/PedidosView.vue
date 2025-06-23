@@ -72,6 +72,7 @@
 import { ref, onMounted, computed } from 'vue'
 import axios from 'axios'
 import { useAuthStore } from '@/store/auth'
+import { fetchPedidos } from '@/services/productService'
 
 const API = 'https://6848c71c45f4c0f5ee6f1594.mockapi.io/Pedidos/pedidos'
 const auth = useAuthStore()
@@ -80,8 +81,7 @@ const pedidos = ref([])
 
 const obtenerPedidos = async () => {
   try {
-    const res = await axios.get(API)
-    pedidos.value = res.data
+    pedidos.value = await fetchPedidos()
   } catch (error) {
     console.error('Error al obtener pedidos:', error)
   }

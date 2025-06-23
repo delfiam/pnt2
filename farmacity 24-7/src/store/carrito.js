@@ -1,3 +1,5 @@
+// src/store/carrito.js
+
 import { defineStore } from 'pinia'
 import { useAuthStore } from './auth'
 import { useProductosStore } from './product'
@@ -104,7 +106,7 @@ export const useCartStore = defineStore('cart', {
 
       const resumen = this.itemsCarrito.map(p => ({
         id: p.id,
-        cant: p.cantidad
+        cantidad: p.cantidad
       }));
 
       try {
@@ -116,8 +118,11 @@ export const useCartStore = defineStore('cart', {
         const currentId = pedidosEnServer.length + 1;
 
         const nuevoPedido = {
-          id: currentId,
+          // en mockApi asigna el id automatico
+            //id: currentId,
           productos: [...this.itemsCarrito],
+          direccion: 'pendiente',
+          estado: 'pendiente',
           user: authStore.currentUser.username,
           fecha: new Date().toISOString()
         };
@@ -125,7 +130,8 @@ export const useCartStore = defineStore('cart', {
         await crearPedido(nuevoPedido);
         console.log('Transacción registrada:', nuevoPedido);
 
-        this.itemsCarrito = [];
+        // si se vacía el carrito aquí no funciona el resumen de productos de checkout 4 
+        //this.itemsCarrito = [];
         return resumen;
 
       } catch (err) {
@@ -136,7 +142,11 @@ export const useCartStore = defineStore('cart', {
       } finally {
         this.saving = false;
       }
+    },
+    vaciarCarrito(){
+      this.itemsCarrito = []
     }
+
   },
 
   persist: {
