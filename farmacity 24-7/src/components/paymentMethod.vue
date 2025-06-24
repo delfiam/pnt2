@@ -77,9 +77,10 @@
 import { ref } from 'vue';
 import { patchEstadoPedido } from '@/services/productService';
 import { useCartStore } from '@/store/carrito'; 
-
+import {useRouter} from 'vue-router';
 const selectedPaymentMethod = ref('card'); 
 const carrito = useCartStore()
+const router = useRouter()
 const cardDetails = ref({
   name: '',
   cardNumber: '',
@@ -109,6 +110,7 @@ const processPayment = () => {
 
 const finalizarCompra = async()=>{
   await patchEstadoPedido(localStorage.getItem('pedidoActivo'), 'en camino')
+  router.push('/cliente')
   carrito.vaciarCarrito()
 }
 </script>

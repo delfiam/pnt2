@@ -36,7 +36,6 @@
       <strong>${{ totalCarrito.toFixed(2) }}</strong>
     </div>
 
-    <router-link to="/carrito" class="d-block mt-3 text-decoration-none text-primary">← Volver al carrito</router-link>
   </div>
 </template>
 
