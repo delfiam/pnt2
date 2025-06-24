@@ -6,38 +6,51 @@
       </h5>
       <form @submit.prevent="handleNext">
         <div class="mb-3">
-          <label class="form-label">Provincia</label>
-          <select class="form-select" v-model="formData.provincia" disabled>
-            <option value="CABA">Ciudad Autónoma de Buenos Aires</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">País</label>
-          <select class="form-select" v-model="formData.pais" disabled>
-            <option value="Argentina">Argentina</option>
-          </select>
-        </div>
-        <div class="mb-3">
           <label class="form-label">Barrio</label>
-          <select class="form-select" v-model="formData.barrio" required>
+          <select
+            class="form-select"
+            :class="{ 'is-invalid': errores.barrio }"
+            v-model="formData.barrio"
+          >
             <option disabled value="">Selecciona un barrio</option>
             <option v-for="barrio in barriosCABA" :key="barrio" :value="barrio">{{ barrio }}</option>
           </select>
+          <div class="invalid-feedback">{{ errores.barrio }}</div>
         </div>
+
         <div class="mb-3">
           <label class="form-label">Calle</label>
-          <input type="text" class="form-control" v-model="formData.calle" required>
+          <input
+            type="text"
+            class="form-control"
+            :class="{ 'is-invalid': errores.calle }"
+            v-model="formData.calle"
+          />
+          <div class="invalid-feedback">{{ errores.calle }}</div>
         </div>
+
         <div class="row">
           <div class="col-md-6 mb-3">
             <label class="form-label">Altura</label>
-            <input type="text" class="form-control" v-model="formData.altura" required>
+            <input
+              type="text"
+              class="form-control"
+              :class="{ 'is-invalid': errores.altura }"
+              v-model="formData.altura"
+            />
+            <div class="invalid-feedback">{{ errores.altura }}</div>
           </div>
+
           <div class="col-md-6 mb-3">
             <label class="form-label">Piso / Depto (opcional)</label>
-            <input type="text" class="form-control" v-model="formData.pisoDepto">
+            <input
+              type="text"
+              class="form-control"
+              v-model="formData.pisoDepto"
+            />
           </div>
         </div>
+
         <div class="d-flex justify-content-between">
           <button type="button" class="btn btn-outline-secondary" @click="handlePrev">Volver</button>
           <button type="submit" class="btn btn-primary">Continuar a Pago</button>
@@ -48,18 +61,58 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { patchDireccion } from '@/services/productService'
+
 const props = defineProps(['formData'])
 const emit = defineEmits(['next', 'prev'])
-const barriosCABA = ["Almagro", "Belgrano", "Caballito", "Palermo", "Recoleta", "Retiro", "Villa Urquiza", "Villa Crespo", "San Telmo", "La Boca", "Barracas"]
+
+const errores = ref({
+  barrio: '',
+  calle: '',
+  altura: ''
+})
+
+const barriosCABA = [
+  "Agronomía", "Almagro", "Balvanera", "Barracas", "Belgrano", "Boedo", "Caballito", "Chacarita",
+  "Coghlan", "Colegiales", "Constitución", "Flores", "Floresta", "La Boca", "La Paternal", "Liniers",
+  "Mataderos", "Monserrat", "Monte Castro", "Nueva Pompeya", "Núñez", "Palermo", "Parque Avellaneda",
+  "Parque Chacabuco", "Parque Patricios", "Puerto Madero", "Recoleta", "Retiro", "Saavedra",
+  "San Cristóbal", "San Nicolás", "San Telmo", "Vélez Sársfield", "Versalles", "Villa Crespo",
+  "Villa del Parque", "Villa Devoto", "Villa Gral. Mitre", "Villa Lugano", "Villa Luro", "Villa Ortúzar",
+  "Villa Pueyrredón", "Villa Real", "Villa Riachuelo", "Villa Santa Rita", "Villa Soldati", "Villa Urquiza"
+]
+
 const handleNext = async () => {
-  if (props.formData.barrio && props.formData.calle && props.formData.altura) {
-    await patchDireccion(localStorage.getItem('pedidoActivo'), props.formData.barrio, props.formData.calle, props.formData.altura, props.formData.pisoDepto)
+  errores.value = { barrio: '', calle: '', altura: '' }
+  const { barrio, calle, altura, pisoDepto } = props.formData
+  let valido = true
+
+  if (!barrio) {
+    errores.value.barrio = 'Seleccioná un barrio.'
+    valido = false
+  }
+  if (!calle) {
+    errores.value.calle = 'Ingresá la calle.'
+    valido = false
+  }
+  if (!altura || isNaN(altura)) {
+    errores.value.altura = 'Ingresá una altura válida.'
+    valido = false
+  }
+
+  if (valido) {
+    await patchDireccion(
+      localStorage.getItem('pedidoActivo'),
+      barrio,
+      calle,
+      altura,
+      pisoDepto
+    )
     emit('next', 3)
-  } else {
-    alert('Completá los campos obligatorios del domicilio.')
   }
 }
+
 const handlePrev = () => {
   emit('prev')
 }
