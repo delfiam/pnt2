@@ -22,27 +22,31 @@ const formData = ref({
 const nextStep = (newStep) => {
   step.value = newStep
 }
+
+const prevStep = () => {
+  if (step.value > 1) {
+    step.value--
+  }
+}
 </script>
 
 <template>
   <div class="checkout-steps d-flex align-items-center justify-content-center mb-4">
-  <div v-for="n in 3" :key="n" class="step-container d-flex align-items-center">
-    <div :class="['step-circle', { 'active': step >= n }]">
-      {{ n }}
+    <div v-for="n in 3" :key="n" class="step-container d-flex align-items-center">
+      <div :class="['step-circle', { 'active': step >= n }]">{{ n }}</div>
+      <div v-if="n < 3" class="step-line"></div>
     </div>
-    <div v-if="n < 3" class="step-line"></div>
   </div>
-</div>
 
-  <div class="checkout-container py-5">
+  <div class="checkout-container py-5 container">
     <div class="row">
       <div class="col-md-4 order-md-1">
         <CheckoutStep4 :carritoItems="carritoItems" :subTotal="subTotal" :totalDescuento="totalDescuento" :totalCarrito="totalCarrito" />
       </div>
       <div class="col-md-8 order-md-0">
         <CheckoutStep1 v-if="step === 1" :formData="formData" @next="nextStep" />
-        <CheckoutStep2 v-if="step === 2" :formData="formData" @next="nextStep" />
-        <CheckoutStep3 v-if="step === 3" :formData="formData" />
+        <CheckoutStep2 v-if="step === 2" :formData="formData" @next="nextStep" @prev="prevStep" />
+        <CheckoutStep3 v-if="step === 3" :formData="formData" @prev="prevStep" />
       </div>
     </div>
   </div>
@@ -50,7 +54,8 @@ const nextStep = (newStep) => {
 
 <style scoped>
 .checkout-steps {
-  gap: 10px;
+  gap: 12px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .step-container {
@@ -59,30 +64,34 @@ const nextStep = (newStep) => {
 }
 
 .step-circle {
-  
-  width: 48px;  /* Antes 32px */
-  height: 48px; /* Antes 32px */
-  font-size: 20px; /* Hacé el número más grande */
+  width: 44px;
+  height: 44px;
+  font-size: 18px;
   border-radius: 50%;
-  background-color: #6c757d; /* gris */
-  color: white;
+  background-color: #d6d6d6;
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
 .step-circle.active {
-  background-color: #007bff; /* azul */
+  background-color: #0d6efd;
 }
 
 .step-line {
   width: 40px;
   height: 3px;
-  background-color: #6c757d;
+  background-color: #d6d6d6;
 }
 
 .step-container .active + .step-line {
-  background-color: #007bff;
+  background-color: #0d6efd;
+}
+
+.checkout-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 </style>
