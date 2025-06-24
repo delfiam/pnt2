@@ -14,9 +14,17 @@ const totalDescuento = computed(() => carritoStore.descuentoTotal)
 
 const step = ref(1)
 const formData = ref({
-  correo: '', nombre: '', apellido: '', dni: '', telefono: '', esCelular: false,
-  recibirPromos: false, provincia: 'CABA', pais: 'Argentina',
-  barrio: '', calle: '', altura: '', pisoDepto: ''
+  correo: '',
+  nombre: '',
+  apellido: '',
+  dni: '',
+  telefono: '',
+  esCelular: false,
+  recibirPromos: false,
+  barrio: '',
+  calle: '',
+  altura: '',
+  pisoDepto: ''
 })
 
 const nextStep = (newStep) => {
@@ -41,7 +49,12 @@ const prevStep = () => {
   <div class="checkout-container py-5 container">
     <div class="row">
       <div class="col-md-4 order-md-1">
-        <CheckoutStep4 :carritoItems="carritoItems" :subTotal="subTotal" :totalDescuento="totalDescuento" :totalCarrito="totalCarrito" />
+        <CheckoutStep4
+          :carritoItems="carritoItems"
+          :subTotal="subTotal"
+          :totalDescuento="totalDescuento"
+          :totalCarrito="totalCarrito"
+        />
       </div>
       <div class="col-md-8 order-md-0">
         <CheckoutStep1 v-if="step === 1" :formData="formData" @next="nextStep" />
