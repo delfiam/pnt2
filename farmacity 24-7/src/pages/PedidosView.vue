@@ -90,7 +90,7 @@ const obtenerPedidos = async () => {
 const pedidosUsuario = computed(() => {
   const user = auth.currentUser?.username
   return user
-    ? pedidos.value.filter(p => p.user === user)
+    ? pedidos.value.filter(p => p.user === user).sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
     : []
 })
 

@@ -32,7 +32,8 @@
     <div class="h-96">
      <chartNecesitaReceta
       :pedidos="pedidos"
-      title="Productos con/sin Receta"
+    :stock="stock"
+      title="Pedidos con/sin Receta"
       :options="{
         responsive: true,
         maintainAspectRatio: false,
@@ -80,11 +81,18 @@ ChartJS.register(
 )
 
 const pedidos = ref([])
-const API = 'https://6848c71c45f4c0f5ee6f1594.mockapi.io/Pedidos/pedidos'
+const stock   = ref([])
+const APIpedidos = 'https://683656cf664e72d28e407eab.mockapi.io/pedidos'
+const APIstock   = 'https://683656cf664e72d28e407eab.mockapi.io/stock'
+
 
 onMounted(async () => {
-  const res = await axios.get(API)
-  pedidos.value = res.data
+  const [pRes, sRes] = await Promise.all([
+    axios.get(APIpedidos),
+    axios.get(APIstock)
+  ])
+  pedidos.value = pRes.data
+  stock.value   = sRes.data
 })
 
 </script>

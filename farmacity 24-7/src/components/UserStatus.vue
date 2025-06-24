@@ -1,6 +1,6 @@
 <template>
   <div class="relative inline-block" @click.stop="toggleDropdown">
-    <UserIcon class="w-6 h-6 text-gray-700 hover:text-green-600 cursor-pointer" />
+    <UserCircleIcon  class="w-6 h-6 text-gray-700 hover:text-green-600 cursor-pointer" />
 
     <div
       v-if="showDropdown"
@@ -19,14 +19,7 @@
       >
         Mis Pedidos
       </RouterLink>
-       <RouterLink v-if="isAdmin"
-        to="/admin/medicamentos"
-         class="block px-4 py-2 text-sm !text-gray-700 hover:!text-gray-900 hover:bg-gray-50 !no-underline"
-  active-class="!text-gray-700"
-  exact-active-class="!text-gray-700"
-      >
-        Medicamentos
-      </RouterLink>
+      
       <button
         @click="logout"
         class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
@@ -40,14 +33,15 @@
 <script setup>
 import { ref } from 'vue'
 import { RouterLink, useRouter, useRoute } from 'vue-router'
-import { UserIcon } from '@heroicons/vue/24/outline'
+import { UserCircleIcon  } from '@heroicons/vue/24/outline'
 import { useAuthStore } from '@/store/auth'
 import { computed } from 'vue'
-
+import { useCartStore } from '@/store/carrito'
 const auth = useAuthStore()
 const router = useRouter()
 const showDropdown = ref(false)
 const route = useRoute()
+const carritoStore = useCartStore()
 
 const toggleDropdown = () => {
   showDropdown.value = !showDropdown.value
@@ -55,6 +49,7 @@ const toggleDropdown = () => {
 
 const logout = async () => {
   await auth.logout()
+  carritoStore.vaciarCarrito()
   router.push('/login')
 }
 

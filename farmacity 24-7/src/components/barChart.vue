@@ -49,8 +49,10 @@ const props = defineProps({
 
 const chartData = computed(() => {
   const grupos = {}
-  props.pedidos.forEach(p => {
-    grupos[p.medicamento] = (grupos[p.medicamento] || 0) + p.cantidad
+  props.pedidos.forEach(pedido => {
+    pedido.productos.forEach(prod => {
+      grupos[prod.nombre] = (grupos[prod.nombre] || 0) + prod.cantidad
+    })
   })
 
   return {

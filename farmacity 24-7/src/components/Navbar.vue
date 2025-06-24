@@ -8,13 +8,30 @@
           class="h-8"
         />
       </RouterLink>
-
-      <div class="flex items-center space-x-4 gap-6">
+      
+        <div class="flex items-center space-x-4 gap-6">
         <ShoppingCartIcon
           v-if="!isCheckout && !isAdmin"
           @click="$emit('toggle-carrito')"
           class="w-6 h-6 text-gray-700 hover:text-green-600 cursor-pointer"
         />
+      
+        <RouterLink v-if="isAdmin"
+        to="/admin"
+         class="block px-4 py-2 text-sm !text-gray-700 hover:!text-gray-900 hover:bg-gray-50 !no-underline"
+  active-class="!text-gray-700"
+  exact-active-class="!text-gray-700"
+      >
+      <ChartBarIcon class="w-6 h-6 text-gray-700 hover:text-green-600" />
+        </RouterLink>
+ <RouterLink v-if="isAdmin"
+        to="/admin/medicamentos"
+         class="block px-4 py-2 text-sm !text-gray-700 hover:!text-gray-900 hover:bg-gray-50 !no-underline"
+  active-class="!text-gray-700"
+  exact-active-class="!text-gray-700"
+      >
+      <ArchiveBoxIcon class="w-6 h-6 text-gray-700 hover:text-green-600" />
+        </RouterLink>
         <UserStatus />
       </div>
     </div>
@@ -25,7 +42,7 @@
 <script setup>
 import { ref } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import { ShoppingCartIcon, UserIcon } from '@heroicons/vue/24/outline'
+import { ShoppingCartIcon, UserIcon, ArchiveBoxIcon, ChartBarIcon} from '@heroicons/vue/24/outline'
 import UserStatus from '@/components/UserStatus.vue'
 import { computed } from 'vue'
 import { useAuthStore } from '@/store/auth'

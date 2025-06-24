@@ -17,53 +17,50 @@ import {
   PieController
 } from 'chart.js'
 
-ChartJS.register(
-  Title,
-  Tooltip,
-  Legend,
-  ArcElement,
-  PieController
-)
+ChartJS.register(Title, Tooltip, Legend, ArcElement, PieController)
 
 const props = defineProps({
-  pedidos: {
-    type: Array,
-    required: true
-  },
-  title: {
-    type: String,
-    default: 'Distribución Productos con/sin Receta'
-  },
+  pedidos: { type: Array, required: true },
+  stock:   { type: Array, required: true },
+  title:   { type: String, default: 'Pedidos de medicamentos con/sin Receta' },
   options: {
     type: Object,
     default: () => ({
       responsive: true,
       maintainAspectRatio: false,
-      plugins: {
-        legend: { position: 'top' }
-      }
+      plugins: { legend: { position: 'bottom' } }
     })
   }
 })
 
+const recetaMap = computed(() => {
+  const m = {}
+  props.stock.forEach(item => {
+    m[item.id] = item.necesita_receta
+  })
+  return m
+})
+
 const chartData = computed(() => {
-  const counts = { "Con receta": 0, "Sin receta": 0 }
+  const counts = { 'Sin receta': 0, 'Con receta': 0 }
+
   props.pedidos.forEach(pedido => {
     pedido.productos.forEach(prod => {
-      if (prod.necesita_receta) counts["Con receta"]++
-      else counts["Sin receta"]++
+      const needs = recetaMap.value[String(prod.id)]
+      const key   = needs ? 'Con receta' : 'Sin receta'
+      counts[key] += prod.cantidad
     })
   })
 
   return {
-    labels: ["Sin receta", "Con receta"],
+    labels: ['Sin receta', 'Con receta'],
     datasets: [
       {
-        label: 'Productos por receta',
-        data: [counts["Sin receta"], counts["Con receta"]],
+        label: 'Unidades pedidas',
+        data: [counts['Sin receta'], counts['Con receta']],
         backgroundColor: [
-          'rgba(75, 192, 192, 0.6)',  
-          'rgba(255, 99, 132, 0.6)'  
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(255, 99, 132, 0.6)'
         ],
         borderWidth: 1
       }
@@ -71,4 +68,3 @@ const chartData = computed(() => {
   }
 })
 </script>
-
